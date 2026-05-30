@@ -1,4 +1,4 @@
-# HighPerformanceTimerToolPlugin v1.0.1
+# HighPerformanceTimerToolPlugin v1.0.3
 # (日本語:高性能タイマープラグイン)
 ## 製作
 製作:ゆっくりぴっと
