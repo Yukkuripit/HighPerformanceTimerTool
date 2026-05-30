@@ -1,0 +1,65 @@
+<UserControl x:Class="HighPerformanceTimer.TimerToolWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Height="550" Width="700">
+	<TabControl Margin="10">
+		<!-- 現在時間タブ -->
+		<TabItem Header="現在時間">
+			<Grid Margin="10">
+				<TextBlock Text="{Binding CurrentTime, UpdateSourceTrigger=PropertyChanged}"
+                           FontSize="48" FontWeight="Bold" HorizontalAlignment="Left"
+                           VerticalAlignment="Top"/>
+			</Grid>
+		</TabItem>
+
+		<!-- 経過時間タブ -->
+		<TabItem Header="経過時間">
+			<StackPanel Margin="10" HorizontalAlignment="Left">
+				<TextBlock Text="{Binding ElapsedTime}" FontSize="36" FontWeight="Bold" Margin="0,20,0,0"/>
+				<WrapPanel Margin="0,20,0,0">
+					<Button Content="リセット" Command="{Binding ResetElapsedCommand}" Width="100" Height="30" Margin="0,0,5,0"/>
+					<TextBlock Text="※ツール起動からの経過時間" FontSize="12" VerticalAlignment="Center"/>
+				</WrapPanel>
+			</StackPanel>
+		</TabItem>
+
+		<!-- 汎用タイマータブ -->
+		<TabItem Header="汎用タイマー">
+			<StackPanel Margin="10" HorizontalAlignment="Left">
+				<WrapPanel Margin="0,0,0,20">
+					<TextBlock Text="分:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+					<TextBox Text="{Binding CountdownMinutes, UpdateSourceTrigger=PropertyChanged}"
+                             Width="50" TextAlignment="Center" VerticalAlignment="Center" Margin="0,0,10,0"/>
+					<TextBlock Text="秒:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+					<TextBox Text="{Binding CountdownSeconds, UpdateSourceTrigger=PropertyChanged}"
+                             Width="50" TextAlignment="Center" VerticalAlignment="Center"/>
+				</WrapPanel>
+				<TextBlock Text="{Binding CountdownDisplay}" FontSize="48" FontWeight="Bold" Margin="0,20,0,0"/>
+				<WrapPanel Margin="0,20,0,0">
+					<Button Content="{Binding CountdownButtonText}" Command="{Binding CountdownStartStopCommand}" Width="80" Margin="0,0,5,0"/>
+					<Button Content="リセット" Command="{Binding CountdownResetCommand}" Width="80"/>
+				</WrapPanel>
+			</StackPanel>
+		</TabItem>
+
+		<!-- ストップウォッチタブ -->
+		<TabItem Header="ストップウォッチ">
+			<StackPanel Margin="10" HorizontalAlignment="Left">
+				<TextBlock Text="{Binding StopwatchDisplay}" FontSize="36" FontWeight="Bold" Margin="0,10,0,0"/>
+				<WrapPanel Margin="0,20,0,20">
+					<Button Content="{Binding StopwatchButtonText}" Command="{Binding StopwatchStartStopCommand}" Width="80" Margin="0,0,5,0"/>
+					<Button Content="リセット" Command="{Binding StopwatchResetCommand}" Width="80" Margin="0,0,5,0"/>
+					<Button Content="ラップ" Command="{Binding StopwatchLapCommand}" Width="80" Margin="0,0,5,0"/>
+					<Button Content="ラップクリア" Command="{Binding ClearLapsCommand}" Width="100"/>
+				</WrapPanel>
+				<DataGrid ItemsSource="{Binding Laps}" AutoGenerateColumns="False" Width="500" CanUserAddRows="False">
+					<DataGrid.Columns>
+						<DataGridTextColumn Header="ラップNo" Binding="{Binding LapNumber}" Width="80"/>
+						<DataGridTextColumn Header="ラップタイム" Binding="{Binding LapTimeDisplay}" Width="150"/>
+						<DataGridTextColumn Header="累計タイム" Binding="{Binding TotalTimeDisplay}" Width="150"/>
+					</DataGrid.Columns>
+				</DataGrid>
+			</StackPanel>
+		</TabItem>
+	</TabControl>
+</UserControl>
